@@ -11,10 +11,15 @@ async function buscarProdutos() {
     produtos.forEach(produto => {
 
         lista.innerHTML += `
-            <li>
-                ${produto.nome} - R$ ${produto.preco}
-            </li>
-        `;
+        <li>
+            ID: ${produto.id} |
+            ${produto.nome} - R$ ${produto.preco}
+
+            <button onclick="deletarProduto(${produto.id})">
+                Excluir
+            </button>
+        </li>
+    `;
     });
 }// JavaScript source code
 
@@ -65,9 +70,7 @@ async function atualizarProduto() {
 }
 
 
-async function deletarProduto() {
-
-    const id = document.getElementById("idDeletar").value;
+async function deletarProduto(id) {
 
     await fetch(`https://localhost:7141/api/ProdutosGeek/${id}`, {
         method: "DELETE"

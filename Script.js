@@ -1,3 +1,6 @@
+
+let produtoEditandoId = null;
+
 async function buscarProdutos() {
 
     const response = await fetch("https://localhost:7141/api/ProdutosGeek");
@@ -11,19 +14,18 @@ async function buscarProdutos() {
     produtos.forEach(produto => {
 
         lista.innerHTML += `
-        <li>
-            ID: ${produto.id} |
-            ${produto.nome} - R$ ${produto.preco}
+    <li data-id="${produto.id}">
+        ${produto.nome} - R$ ${produto.preco}
 
-            <button onclick="prepararEdicao(${produto.id}, '${produto.nome}', ${produto.preco})">
-                Editar
-            </button>
+        <button onclick="prepararEdicao(${produto.id}, '${produto.nome}', ${produto.preco})">
+            Editar
+        </button>
 
-            <button onclick="deletarProduto(${produto.id})">
-                Excluir
-            </button>
-        </li>
-    `;
+        <button onclick="deletarProduto(${produto.id})">
+            Excluir
+        </button>
+    </li>
+`;
     });
 }// JavaScript source code
 
@@ -54,21 +56,21 @@ async function adicionarProduto() {
 
 async function atualizarProduto() {
 
-    const id = document.getElementById("idAtualizar").value;
-
     const produtoAtualizado = {
-        id: parseInt(id),
+        id: produtoEditandoId,
         nome: document.getElementById("nomeAtualizar").value,
         preco: parseFloat(document.getElementById("precoAtualizar").value)
     };
 
-    await fetch(`https://localhost:7141/api/ProdutosGeek/${id}`, {
+    await fetch(`https://localhost:7141/api/ProdutosGeek/${produtoEditandoId}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(produtoAtualizado)
     });
+
+    produtoEditandoId = null;
 
     buscarProdutos();
 }
@@ -91,7 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function prepararEdicao(id, nome, preco) {
 
-    document.getElementById("idAtualizar").value = id;
+    produtoEditandoId = id;
+
     document.getElementById("nomeAtualizar").value = nome;
     document.getElementById("precoAtualizar").value = preco;
 }

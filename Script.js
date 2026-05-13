@@ -80,3 +80,7 @@ async function deletarProduto(id) {
 
     buscarProdutos();
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    buscarProdutos();
+});

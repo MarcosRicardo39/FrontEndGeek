@@ -1,5 +1,6 @@
 
 let produtoEditandoId = null;
+imagemUrl: document.getElementById("imagemProduto").value
 
 async function buscarProdutos() {
 
@@ -23,7 +24,7 @@ async function buscarProdutos() {
                 <p>R$ ${produto.preco}</p>
 
                 <div class="actions">
-                    <button onclick="prepararEdicao(${produto.id}, '${produto.nome}', ${produto.preco})">
+                    <button onclick='prepararEdicao(${produto.id}, ${JSON.stringify(produto.nome)}, ${produto.preco})'>
                         Editar
                     </button>
 
@@ -35,30 +36,27 @@ async function buscarProdutos() {
 
         </li>
     `;
-    })
+    });
 }// JavaScript source code
-
 async function adicionarProduto() {
 
     const nome = document.getElementById("nomeProduto").value;
     const preco = document.getElementById("precoProduto").value;
+    const imagem = document.getElementById("imagemProduto").value;
 
     const novoProduto = {
         nome: nome,
-        preco: parseFloat(preco)
+        preco: parseFloat(preco),
+        imagemUrl: imagem
     };
 
-    const response = await fetch("https://localhost:7141/api/ProdutosGeek", {
+    await fetch("https://localhost:7141/api/ProdutosGeek", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(novoProduto)
     });
-
-    const dados = await response.json();
-
-    console.log(dados);
 
     buscarProdutos();
 }

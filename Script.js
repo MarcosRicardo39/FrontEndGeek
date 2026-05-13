@@ -97,4 +97,16 @@ function prepararEdicao(id, nome, preco) {
 
     document.getElementById("nomeAtualizar").value = nome;
     document.getElementById("precoAtualizar").value = preco;
+
+    document.querySelectorAll("li").forEach(li => {
+        li.style.background = "";
+    });
+
+    event.target.closest("li").style.background = "#ffeaa7";
+}
+
+function cancelarEdicao() {
+    produtoEditandoId = null;
+    document.getElementById("nomeAtualizar").value = "";
+    document.getElementById("precoAtualizar").value = "";
 }

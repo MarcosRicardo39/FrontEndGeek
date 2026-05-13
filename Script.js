@@ -15,6 +15,10 @@ async function buscarProdutos() {
             ID: ${produto.id} |
             ${produto.nome} - R$ ${produto.preco}
 
+            <button onclick="prepararEdicao(${produto.id}, '${produto.nome}', ${produto.preco})">
+                Editar
+            </button>
+
             <button onclick="deletarProduto(${produto.id})">
                 Excluir
             </button>
@@ -84,3 +88,10 @@ async function deletarProduto(id) {
 document.addEventListener("DOMContentLoaded", function () {
     buscarProdutos();
 });
+
+function prepararEdicao(id, nome, preco) {
+
+    document.getElementById("idAtualizar").value = id;
+    document.getElementById("nomeAtualizar").value = nome;
+    document.getElementById("precoAtualizar").value = preco;
+}

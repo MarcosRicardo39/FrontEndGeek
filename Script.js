@@ -14,19 +14,28 @@ async function buscarProdutos() {
     produtos.forEach(produto => {
 
         lista.innerHTML += `
-    <li data-id="${produto.id}">
-        ${produto.nome} - R$ ${produto.preco}
+        <li class="card">
+            
+            <img src="${produto.imagemUrl ?? 'https://via.placeholder.com/120'}" />
 
-        <button onclick="prepararEdicao(${produto.id}, '${produto.nome}', ${produto.preco})">
-            Editar
-        </button>
+            <div class="info">
+                <h3>${produto.nome}</h3>
+                <p>R$ ${produto.preco}</p>
 
-        <button onclick="deletarProduto(${produto.id})">
-            Excluir
-        </button>
-    </li>
-`;
-    });
+                <div class="actions">
+                    <button onclick="prepararEdicao(${produto.id}, '${produto.nome}', ${produto.preco})">
+                        Editar
+                    </button>
+
+                    <button onclick="deletarProduto(${produto.id})">
+                        Excluir
+                    </button>
+                </div>
+            </div>
+
+        </li>
+    `;
+    })
 }// JavaScript source code
 
 async function adicionarProduto() {

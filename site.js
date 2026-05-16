@@ -8,6 +8,10 @@ async function buscarProdutos() {
 
     lista.innerHTML = "";
 
+    function irParaAdmin() {
+        window.location.href = "login.html";
+    }
+
     produtos.forEach(produto => {
 
         lista.innerHTML += `

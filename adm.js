@@ -128,6 +128,9 @@ async function salvarEdicao() {
     fecharModal();
     buscarProdutos();
 }
+function voltarParaSite() {
+    window.location.href = "index.html";
+}
 
 
 buscarProdutos();

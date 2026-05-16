@@ -29,4 +29,8 @@ async function buscarProdutos() {
     });
 }
 
+function irParaAdmin() {
+    window.location.href = "login.html";
+}
+
 buscarProdutos();

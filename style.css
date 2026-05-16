@@ -127,3 +127,22 @@ body {
     object-fit: cover;
     border-radius: 10px;
 }
+
+.login-container {
+    background: white;
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+    .login-container input {
+        width: 90%;
+    }
+
+#mensagemErro {
+    color: red;
+    margin-top: 10px;
+}

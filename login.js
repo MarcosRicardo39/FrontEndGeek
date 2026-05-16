@@ -33,4 +33,10 @@ function fazerLogin() {
         }
 
     }, 800);
+
+   
 }
+
+function voltarParaLoja() {
+    window.location.href = "index.html";
+}   

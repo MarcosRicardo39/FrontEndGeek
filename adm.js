@@ -1,4 +1,10 @@
 
+const logado = localStorage.getItem("logado");
+
+if (logado !== "true") {
+    window.location.href = "login.html";
+}
+
 let produtoEditandoId = null;
 imagemUrl: document.getElementById("imagemProduto").value
 
@@ -117,5 +123,12 @@ function cancelarEdicao() {
     document.getElementById("nomeAtualizar").value = "";
     document.getElementById("precoAtualizar").value = "";
 }
+
+function logout() {
+    localStorage.removeItem("logado");
+    window.location.href = "login.html";
+}
+
+
 
 buscarProdutos();

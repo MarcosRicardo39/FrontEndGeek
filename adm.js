@@ -117,3 +117,5 @@ function cancelarEdicao() {
     document.getElementById("nomeAtualizar").value = "";
     document.getElementById("precoAtualizar").value = "";
 }
+
+buscarProdutos();

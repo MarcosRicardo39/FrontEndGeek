@@ -39,4 +39,4 @@ function fazerLogin() {
 
 function voltarParaLoja() {
     window.location.href = "index.html";
-}   
+}

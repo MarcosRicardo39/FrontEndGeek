@@ -5,32 +5,38 @@ if (localStorage.getItem("logado") !== "true") {
     window.location.replace("login.html");
 }
 
+function logout() {
+    localStorage.removeItem("logado");
+    window.location.href = "login.html";
+}
+
 let produtoEditandoId = null;
 imagemUrl: document.getElementById("imagemProduto").value
+
+function mostrarProdutos() {
+    buscarProdutos();
+}
 
 async function buscarProdutos() {
 
     const response = await fetch("https://localhost:7141/api/ProdutosGeek");
-
     const produtos = await response.json();
 
     const lista = document.getElementById("listaProdutos");
-
     lista.innerHTML = "";
 
     produtos.forEach(produto => {
 
         lista.innerHTML += `
-        <li class="card">
-            
-            <img src="${produto.imagemUrl ?? 'https://via.placeholder.com/120'}" />
+            <li class="card">
 
-            <div class="info">
-                <h3>${produto.nome}</h3>
-                <p>R$ ${produto.preco}</p>
+                <img src="${produto.imagemUrl ?? 'https://via.placeholder.com/80'}">
 
-                <div class="actions">
-                    <button onclick='prepararEdicao(${produto.id}, ${JSON.stringify(produto.nome)}, ${produto.preco})'>
+                <div>
+                    <h3>${produto.nome}</h3>
+                    <p>R$ ${produto.preco}</p>
+
+                    <button onclick="prepararEdicao(${produto.id}, ${JSON.stringify(produto.nome)}, ${produto.preco})">
                         Editar
                     </button>
 
@@ -38,97 +44,10 @@ async function buscarProdutos() {
                         Excluir
                     </button>
                 </div>
-            </div>
 
-        </li>
-    `;
+            </li>
+        `;
     });
-}// JavaScript source code
-async function adicionarProduto() {
-
-    const nome = document.getElementById("nomeProduto").value;
-    const preco = document.getElementById("precoProduto").value;
-    const imagem = document.getElementById("imagemProduto").value;
-
-    const novoProduto = {
-        nome: nome,
-        preco: parseFloat(preco),
-        imagemUrl: imagem
-    };
-
-    await fetch("https://localhost:7141/api/ProdutosGeek", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(novoProduto)
-    });
-
-    buscarProdutos();
 }
-
-async function atualizarProduto() {
-
-    const produtoAtualizado = {
-        id: produtoEditandoId,
-        nome: document.getElementById("nomeAtualizar").value,
-        preco: parseFloat(document.getElementById("precoAtualizar").value)
-    };
-
-    await fetch(`https://localhost:7141/api/ProdutosGeek/${produtoEditandoId}`, {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(produtoAtualizado)
-    });
-
-    produtoEditandoId = null;
-
-    buscarProdutos();
-}
-
-
-async function deletarProduto(id) {
-
-    await fetch(`https://localhost:7141/api/ProdutosGeek/${id}`, {
-        method: "DELETE"
-    });
-
-    console.log("Produto removido");
-
-    buscarProdutos();
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    buscarProdutos();
-});
-
-function prepararEdicao(id, nome, preco) {
-
-    produtoEditandoId = id;
-
-    document.getElementById("nomeAtualizar").value = nome;
-    document.getElementById("precoAtualizar").value = preco;
-
-    document.querySelectorAll("li").forEach(li => {
-        li.style.background = "";
-    });
-
-    event.target.closest("li").style.background = "#ffeaa7";
-}
-
-function cancelarEdicao() {
-    produtoEditandoId = null;
-    document.getElementById("nomeAtualizar").value = "";
-    document.getElementById("precoAtualizar").value = "";
-}
-
-function logout() {
-    localStorage.removeItem("logado");
-    window.location.href = "login.html";
-}
-
-
 
 buscarProdutos();

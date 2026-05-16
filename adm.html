@@ -2,69 +2,41 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Sistema Geek</title>
+    <title>Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>Produtos Geek</h1>
+    <div class="layout">
 
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <h2>Admin</h2>
 
-    <button onclick="buscarProdutos()">
-        Buscar Produtos
-    </button>
+            <button onclick="mostrarProdutos()">Produtos</button>
+            <button onclick="logout()">Sair</button>
+        </div>
 
+        <!-- CONTEÚDO -->
+        <div class="content">
 
+            <h1>Produtos</h1>
 
-    <h2>Adicionar Produto</h2>
+            <div class="form">
+                <input type="text" id="nomeProduto" placeholder="Nome">
+                <input type="number" id="precoProduto" placeholder="Preço">
+                <input type="text" id="imagemProduto" placeholder="Imagem URL">
 
-    <input type="text" id="nomeProduto" placeholder="Nome do produto">
-    <input type="number" id="precoProduto" placeholder="Preço">
-    <input type="text" id="imagemProduto" placeholder="URL da imagem">
+                <button onclick="adicionarProduto()">Adicionar</button>
+            </div>
 
-    <button onclick="adicionarProduto()">
-        Adicionar
-    </button>
+            <ul id="listaProdutos"></ul>
 
+        </div>
 
-
-    <h2>Atualizar Produto</h2>
-
-    <!--<input type="number" id="idAtualizar" placeholder="ID">-->
-    <input type="text" id="nomeAtualizar" placeholder="Novo nome">
-    <input type="number" id="precoAtualizar" placeholder="Novo preço">
-
-    <button onclick="atualizarProduto()">
-        Atualizar
-    </button>
-
-    <h2>Deletar Produto</h2>
-
-    <!--<input type="number" id="idDeletar" placeholder="ID">-->
-    <button onclick="cancelarEdicao()">Cancelar</button>
-
-    <button onclick="deletarProduto()">
-        Deletar
-    </button>
-
-    <ul id="listaProdutos"></ul>
+    </div>
 
     <script src="adm.js"></script>
-
-    <button onclick="logout()">Sair</button>
-
-    <script>
-        if (localStorage.getItem("logado") !== "true") {
-            window.location.replace("login.html");
-        }
-    </script>
-
-
-
-
-
-
-
 
 </body>
 </html>

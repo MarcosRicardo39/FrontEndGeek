@@ -1,8 +1,8 @@
 
 const logado = localStorage.getItem("logado");
 
-if (logado !== "true") {
-    window.location.href = "login.html";
+if (localStorage.getItem("logado") !== "true") {
+    window.location.replace("login.html");
 }
 
 let produtoEditandoId = null;

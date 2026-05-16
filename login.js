@@ -7,7 +7,7 @@ function fazerLogin() {
 
         localStorage.setItem("logado", "true");
 
-        window.location.href = "admin.html";
+        window.location.href = "adm.html";
 
     } else {
 

@@ -215,3 +215,39 @@ font-family: Arial;
     flex-direction: column;
     gap: 10px;
 }
+
+
+/* ===== LOGIN / CADASTRO (novo padrão) ===== */
+
+.login-box {
+    background: white;
+    max-width: 380px;
+    margin: 80px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+    .login-box input {
+        width: 90%;
+        margin: 8px 0;
+    }
+
+    .login-box button {
+        width: 95%;
+    }
+
+    .login-box p {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .login-box a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .login-box a:hover {
+            text-decoration: underline;
+        }

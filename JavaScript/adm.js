@@ -1,7 +1,7 @@
 
 
 if (localStorage.getItem("logado") !== "true") {
-    window.location.replace("login.html");
+    window.location.replace("../Html/login.html");
 }
 
 
@@ -12,7 +12,7 @@ let produtoEditandoId = null;
 
 function logout() {
     localStorage.removeItem("logado");
-    window.location.href = "login.html";
+    window.location.href = "../Html/login.html";
 }
 
 function mostrarProdutos() {
@@ -32,26 +32,40 @@ async function buscarProdutos() {
     produtos.forEach(produto => {
 
         lista.innerHTML += `
-            <li class="card">
+        <li class="card">
 
-                <img src="${produto.imagemUrl ?? 'https://via.placeholder.com/80'}">
+            <img src="${produto.imagemUrl ?? 'https://via.placeholder.com/120'}" />
 
-                <div>
-                    <h3>${produto.nome}</h3>
-                    <p>R$ ${produto.preco}</p>
+            <div class="info">
 
-                    <button onclick='prepararEdicao(${produto.id}, ${JSON.stringify(produto.nome)}, ${produto.preco}, ${JSON.stringify(produto.imagemUrl)})'>
-                        Editar
-                    </button>
+                <h3>${produto.nome}</h3>
 
-                    <button onclick="deletarProduto(${produto.id})">
-                        Excluir
-                    </button>
-                </div>
+                <p>R$ ${produto.preco}</p>
 
-            </li>
-        `;
+                <button onclick='adicionarCarrinho(${JSON.stringify(produto)})'>
+                    Adicionar ao carrinho
+                </button>
+
+            </div>
+
+        </li>
+    `;
     });
+}
+
+function adicionarCarrinho(produto) {
+
+    let carrinho =
+        JSON.parse(localStorage.getItem("carrinho")) || [];
+
+    carrinho.push(produto);
+
+    localStorage.setItem(
+        "carrinho",
+        JSON.stringify(carrinho)
+    );
+
+    alert("Produto adicionado ao carrinho!");
 }
 
 
@@ -129,7 +143,7 @@ async function salvarEdicao() {
     buscarProdutos();
 }
 function voltarParaSite() {
-    window.location.href = "index.html";
+    window.location.href = "../Html/index.html";
 }
 
 

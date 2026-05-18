@@ -8,16 +8,14 @@ async function buscarProdutos() {
 
     lista.innerHTML = "";
 
-    function irParaAdmin() {
-        window.location.href = "login.html";
-    }
+   
 
     produtos.forEach(produto => {
 
         lista.innerHTML += `
             <li class="card">
 
-                <img src="${produto.imagemUrl ?? 'https://via.placeholder.com/120'}" />
+                <img src="${produto.imagemUrl ?? 'https://via.placeholder.com/80'}" />
 
                 <div class="info">
                     <h3>${produto.nome}</h3>
@@ -30,7 +28,8 @@ async function buscarProdutos() {
 }
 
 function irParaAdmin() {
-    window.location.href = "login.html";
+    window.location.href = "../Html/login.html";
 }
+
 
 buscarProdutos();

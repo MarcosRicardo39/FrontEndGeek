@@ -22,7 +22,7 @@ function fazerLogin() {
         if (usuario === "admin" && senha === "123") {
 
             localStorage.setItem("logado", "true");
-            window.location.href = "adm.html";
+            window.location.href = "../Html/adm.html";
 
         } else {
 
@@ -38,5 +38,5 @@ function fazerLogin() {
 }
 
 function voltarParaLoja() {
-    window.location.href = "index.html";
+    window.location.href = "../Html/index.html";
 }

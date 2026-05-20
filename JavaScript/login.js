@@ -41,30 +41,3 @@ function voltarParaLoja() {
     window.location.href = "../Html/index.html";
 }
 
-async function login() {
-
-    const usuario = {
-        email: document.getElementById("email").value,
-        senha: document.getElementById("senha").value
-    };
-
-    const response = await fetch("https://localhost:7141/api/Usuarios/login", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(usuario)
-    });
-
-    if (response.ok) {
-        const data = await response.json();
-
-        alert("Login realizado!");
-
-        localStorage.setItem("usuarioLogado", JSON.stringify(data));
-
-        window.location.href = "index.html";
-    } else {
-        alert("Email ou senha inválidos");
-    }
-}

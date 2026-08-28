@@ -28,7 +28,11 @@ async function buscarProdutos() {
 }
 
 function irParaAdmin() {
-    window.location.href = "../Html/login.html";
+    window.location.href = "../Html/user-login.html";
+}
+
+function voltarParaLoja() {
+    window.location.href = "../Html/index.html";
 }
 
 

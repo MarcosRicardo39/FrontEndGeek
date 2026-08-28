@@ -1,7 +1,11 @@
 
 
-if (localStorage.getItem("logado") !== "true") {
-    window.location.replace("../Html/login.html");
+if (
+    localStorage.getItem("logado") !== "true" ||
+    localStorage.getItem("tipoUsuario") !== "adm"
+) {
+    window.location.replace("user-login.html");
+    window.location.href = "user-login.html";
 }
 
 
@@ -12,7 +16,8 @@ let produtoEditandoId = null;
 
 function logout() {
     localStorage.removeItem("logado");
-    window.location.href = "../Html/login.html";
+    localStorage.removeItem("tipoUsuario");
+    window.location.href = "user-login.html";
 }
 
 function mostrarProdutos() {
@@ -45,6 +50,9 @@ async function buscarProdutos() {
                 <button onclick='adicionarCarrinho(${JSON.stringify(produto)})'>
                     Adicionar ao carrinho
                 </button>
+                <button onclick="deletarProduto(${produto.id})">
+                Excluir
+                </button>
 
             </div>
 
@@ -69,17 +77,16 @@ function adicionarCarrinho(produto) {
 }
 
 
-
 async function adicionarProduto() {
 
     const nome = document.getElementById("nomeProduto").value;
     const preco = document.getElementById("precoProduto").value;
-    const imagem = document.getElementById("imagemProduto").value;
+    const imagemUrl = document.getElementById("imagemProduto").value;
 
     const novoProduto = {
         nome: nome,
         preco: parseFloat(preco),
-        imagemUrl: imagem
+        imagemUrl: imagemUrl
     };
 
     await fetch("https://localhost:7141/api/ProdutosGeek", {
@@ -96,6 +103,11 @@ async function adicionarProduto() {
 
 
 async function deletarProduto(id) {
+
+    const confirmar =
+        confirm("Deseja realmente excluir este produto?");
+
+    if (!confirmar) return;
 
     await fetch(`https://localhost:7141/api/ProdutosGeek/${id}`, {
         method: "DELETE"
@@ -133,9 +145,7 @@ async function salvarEdicao() {
 
     await fetch(`https://localhost:7141/api/ProdutosGeek/${produtoEditandoId}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
+       
         body: JSON.stringify(produtoAtualizado)
     });
 
